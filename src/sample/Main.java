@@ -25,7 +25,7 @@ public class Main extends Application {
         BorderPane bp = new BorderPane();
         GridPane gp = new GridPane();
         HBox hbox = new HBox();
-        Label welcome = new Label("Roskilde Frie Børnehave");
+        Label welcome = new Label("Jarls Frie Børnehave");
         welcome.setFont(Font.font("Helvetica", FontWeight.BOLD, 20));
         Label user = new Label("User");
         Label password = new Label("Password");
