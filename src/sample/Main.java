@@ -65,9 +65,13 @@ public class Main extends Application {
 
         login.setOnAction(event -> {
             if(!txtUser.getText().equalsIgnoreCase("Anders") || !txtPassword.getText().equals("123")) {
-                txtUser.clear();
-                txtUser.setPromptText("Incorrect user name");
-
+                if (!txtUser.getText().equalsIgnoreCase("Anders")) {
+                    txtUser.clear();
+                    txtUser.setPromptText("Incorrect user name");
+                } else {
+                    txtPassword.clear();
+                    txtPassword.setPromptText("Incorrect password");
+                }
             } else {
                 BorderPane bpLoggedIn = new BorderPane();
                 Scene succes = new Scene(bpLoggedIn, 1200, 750);
