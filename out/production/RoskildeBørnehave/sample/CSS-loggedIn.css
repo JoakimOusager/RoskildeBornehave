@@ -11,3 +11,12 @@
 .table-column {
     -fx-pref-width: 200;
 }
+
+#day {
+    -fx-pref-width: 200;
+
+}
+
+#time {
+    -fx-pref-width: 100;
+}

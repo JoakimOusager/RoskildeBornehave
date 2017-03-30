@@ -1,12 +1,18 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -15,8 +21,12 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
+import javax.swing.text.*;
+
 
 public class Main extends Application {
+
+    TableView<Person> tableViewTimeplan;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -60,8 +70,6 @@ public class Main extends Application {
         gp.add(txtUser, 1, 0);
         gp.add(txtPassword, 1, 1);
         gp.add(login, 1, 3);
-
-
 
         login.setOnAction(event -> {
             if(!txtUser.getText().equalsIgnoreCase("Anders") || !txtPassword.getText().equals("123")) {
@@ -133,6 +141,88 @@ public class Main extends Application {
                     bpLoggedIn.setCenter(vboxChildren);
                 });
 
+                timeplan.setOnAction(e -> {
+                    VBox vboxTimeplan = new VBox();
+
+                    TableColumn<Person, String> nameColumn = new TableColumn<>("Name");
+                    nameColumn.setPrefWidth(200);
+                    nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+                    TableColumn mondayColumn = new TableColumn("Monday");
+                    mondayColumn.setId("day");
+
+                    TableColumn<Person, Integer> mondayStart = new TableColumn<>("Start");
+                    mondayStart.setId("time");
+                    mondayStart.setCellValueFactory(new PropertyValueFactory<>("timesMondayStart"));
+
+                    TableColumn<Person, Integer> mondayEnd = new TableColumn<>("End");
+                    mondayEnd.setId("time");
+                    mondayEnd.setCellValueFactory(new PropertyValueFactory<>("timesMondayEnd"));
+
+                    mondayColumn.getColumns().addAll(mondayStart, mondayEnd);
+
+                    TableColumn thuesdayColumn = new TableColumn<>("Thuesday");
+                    thuesdayColumn.setId("day");
+
+                    TableColumn<Person, Integer> thuesdayStart = new TableColumn<>("Start");
+                    thuesdayStart.setId("time");
+                    thuesdayStart.setCellValueFactory(new PropertyValueFactory<>("timesThuesdayStart"));
+
+                    TableColumn<Person, Integer> thuesdayEnd = new TableColumn<>("End");
+                    thuesdayEnd.setId("time");
+                    thuesdayEnd.setCellValueFactory(new PropertyValueFactory<>("timesThuesdayEnd"));
+
+                    thuesdayColumn.getColumns().addAll(thuesdayStart, thuesdayEnd);
+
+                    TableColumn wednesdayColumn = new TableColumn("Wednesday");
+                    wednesdayColumn.setId("day");
+
+                    TableColumn<Person, Integer> wednesdayStart = new TableColumn<>("Start");
+                    wednesdayStart.setId("time");
+                    wednesdayStart.setCellValueFactory(new PropertyValueFactory<>("timesWednesdayStart"));
+
+                    TableColumn<Person, Integer> wednesdayEnd = new TableColumn<>("End");
+                    wednesdayEnd.setId("time");
+                    wednesdayEnd.setCellValueFactory(new PropertyValueFactory<>("timesWednesdayEnd"));
+
+                    wednesdayColumn.getColumns().addAll(wednesdayStart, wednesdayEnd);
+
+                    TableColumn thursdayColumn = new TableColumn("Thursday");
+                    thursdayColumn.setId("day");
+
+                    TableColumn<Person, Integer> thursdayStart = new TableColumn<>("Start");
+                    thursdayStart.setId("time");
+                    thursdayStart.setCellValueFactory(new PropertyValueFactory<>("timesThursdayStart"));
+
+                    TableColumn<Person, Integer> thursdayEnd = new TableColumn<>("End");
+                    thursdayEnd.setId("time");
+                    thursdayEnd.setCellValueFactory(new PropertyValueFactory<>("timesThursdayEnd"));
+
+                    thursdayColumn.getColumns().addAll(thursdayStart, thursdayEnd);
+
+                    TableColumn fridayColumn = new TableColumn("Friday");
+                    fridayColumn.setId("day");
+
+                    TableColumn<Person, Integer> fridayStart = new TableColumn("Start");
+                    fridayStart.setId("time");
+                    fridayStart.setCellValueFactory(new PropertyValueFactory<>("timesFridayStart"));
+
+                    TableColumn<Person, Integer> fridayEnd = new TableColumn<>("End");
+                    fridayEnd.setId("time");
+                    fridayEnd.setCellValueFactory(new PropertyValueFactory<>("timesFridayEnd"));
+
+                    fridayColumn.getColumns().addAll(fridayStart, fridayEnd);
+
+                    tableViewTimeplan = new TableView<>();
+                    tableViewTimeplan.setItems(getPerson());
+                    tableViewTimeplan.getColumns().addAll(nameColumn, mondayColumn, thuesdayColumn, wednesdayColumn, thursdayColumn,
+                            fridayColumn);
+
+
+                    vboxTimeplan.getChildren().add(tableViewTimeplan);
+                    bpLoggedIn.setCenter(vboxTimeplan);
+                });
+
                 bpLoggedIn.getStylesheets().add("sample/CSS-loggedIn.css");
                 primaryStage.setTitle("Roskilde Frie Børnehave");
                 primaryStage.setScene(succes);
@@ -148,4 +238,12 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
+    public ObservableList<Person> getPerson() {
+        ObservableList<Person> persons = FXCollections.observableArrayList();
+        persons.add(new Person("Daniella", 8, 16, 8, 16, 8, 16, 8,16, 8, 16));
+        return persons;
+    }
+
+
 }
