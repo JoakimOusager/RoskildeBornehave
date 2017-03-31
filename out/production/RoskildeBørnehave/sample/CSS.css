@@ -1,4 +1,14 @@
 #login {
     -fx-min-width: 200;
+}
+
+#bpLogin {
+    -fx-background-color: white;
+}
+
+#fieldLogin {
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: black;
+    -fx-background-color: white;
 
 }

@@ -20,6 +20,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -27,6 +29,8 @@ import javafx.util.Callback;
 
 import javax.swing.text.*;
 import java.awt.*;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class Main extends Application {
@@ -38,6 +42,7 @@ public class Main extends Application {
 
         //Initialiserer alt der skal være på login-siden.
         BorderPane bp = new BorderPane();
+        bp.setId("bpLogin");
         GridPane gp = new GridPane();
         HBox hbox = new HBox();
         Label welcome = new Label("Jarls Frie Børnehave");
@@ -45,7 +50,9 @@ public class Main extends Application {
         Label user = new Label("User");
         Label password = new Label("Password");
         TextField txtUser = new TextField();
+        txtUser.setId("fieldLogin");
         PasswordField txtPassword = new PasswordField();
+        txtPassword.setId("fieldLogin");
         Button login = new Button("Login");
         login.setId("login");
 
@@ -86,6 +93,7 @@ public class Main extends Application {
                     txtPassword.setPromptText("Incorrect password");
                 }
             } else {
+
                 BorderPane bpLoggedIn = new BorderPane();
                 Scene succes = new Scene(bpLoggedIn, 1300, 750);
                 Button employees = new Button("Medarbejdere");
@@ -256,6 +264,8 @@ public class Main extends Application {
 
                     vboxTimeplan.getChildren().addAll(hboxWeek, tableViewTimeplan);
                     bpLoggedIn.setCenter(vboxTimeplan);
+
+
                 });
 
                 bpLoggedIn.getStylesheets().add("sample/CSS-loggedIn.css");
