@@ -12,12 +12,16 @@
 
 #name {
     -fx-pref-width: 300;
+    -fx-font-size: 15;
 }
 
 
 #day {
     -fx-pref-width: 200;
+    -fx-background-color: white;
+    -fx-font-size: 15;
 }
+
 
 #timeStart {
     -fx-pref-width: 100;
@@ -40,13 +44,13 @@
     -fx-border-width: 0 0 1 0;
 }
 
-#blankCell {
-    -fx-pref-width: 20;
-}
-
 #weekBtn {
     -fx-pref-height: 25;
     -fx-pref-width: 50;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: steelblue;
 }
 
 

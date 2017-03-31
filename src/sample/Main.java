@@ -10,7 +10,10 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
@@ -23,6 +26,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import javax.swing.text.*;
+import java.awt.*;
 
 
 public class Main extends Application {
@@ -112,10 +116,6 @@ public class Main extends Application {
                 employees.setOnAction(event2 -> {
                     TableView tvEmployees = new TableView();
                     VBox vbox = new VBox();
-
-
-
-                    tvEmployees.setEditable(true);
 
                     TableColumn firstNameCol = new TableColumn("Fornavn");
                     TableColumn lastNameCol = new TableColumn("Efternavn");
@@ -251,6 +251,7 @@ public class Main extends Application {
                     tableViewTimeplan.setItems(getPerson());
                     tableViewTimeplan.getColumns().addAll(nameColumn, mondayColumn, thuesdayColumn, wednesdayColumn, thursdayColumn,
                             fridayColumn);
+                    tableViewTimeplan.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
 
                     vboxTimeplan.getChildren().addAll(hboxWeek, tableViewTimeplan);
