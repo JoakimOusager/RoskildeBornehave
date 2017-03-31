@@ -20,6 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import javax.swing.text.*;
 
@@ -82,14 +83,29 @@ public class Main extends Application {
                 }
             } else {
                 BorderPane bpLoggedIn = new BorderPane();
-                Scene succes = new Scene(bpLoggedIn, 1200, 750);
+                Scene succes = new Scene(bpLoggedIn, 1300, 750);
                 Button employees = new Button("Medarbejdere");
+                employees.setId("menuText");
                 Button children = new Button("Indregistrerede børn");
+                children.setId("menuText");
                 Button timeplan = new Button("Vagtplan");
+                timeplan.setId("menuText");
                 Button logout = new Button("Log ud");
+                logout.setId("menuText");
+                Label loggedInAs = new Label("Logget ind:");
+                loggedInAs.setId("loggedInLabel");
+                loggedInAs.setFont(Font.font("Helvetica", FontWeight.BOLD, 12));
+                loggedInAs.setAlignment(Pos.CENTER);
+                Label userLoggedInIs = new Label(txtUser.getText());
+                userLoggedInIs.setId("loggedInLabel");
+                userLoggedInIs.setFont(Font.font("Helvetica", FontWeight.BOLD, 15));
+                userLoggedInIs.setAlignment(Pos.CENTER);
+                VBox vboxLoggedIn = new VBox();
                 HBox menu = new HBox();
 
-                menu.getChildren().addAll(employees, children, timeplan, logout);
+                vboxLoggedIn.getChildren().addAll(loggedInAs, userLoggedInIs);
+
+                menu.getChildren().addAll(employees, children, timeplan, logout, vboxLoggedIn);
                 menu.setAlignment(Pos.CENTER);
                 bpLoggedIn.setTop(menu);
 
@@ -142,76 +158,94 @@ public class Main extends Application {
                 });
 
                 timeplan.setOnAction(e -> {
+
+                    HBox hboxWeek = new HBox(5);
+                    Button previousWeek = new Button("<-");
+                    previousWeek.setId("weekBtn");
+                    Button nextWeek = new Button("->");
+                    nextWeek.setId("weekBtn");
+                    Label week = new Label("Uge:");
+                    week.setFont(Font.font("Helvetica", FontWeight.BOLD, 18));
+                    Label weekNumber = new Label("Foreksempel 5");
+
+
+                    hboxWeek.getChildren().addAll(previousWeek, week, weekNumber, nextWeek);
+                    hboxWeek.setAlignment(Pos.CENTER);
+                    hboxWeek.setPadding(new Insets(5, 0, 5, 0));
+
                     VBox vboxTimeplan = new VBox();
 
-                    TableColumn<Person, String> nameColumn = new TableColumn<>("Name");
-                    nameColumn.setPrefWidth(200);
+                    TableColumn<Person, String> nameColumn = new TableColumn<>("Navn");
+                    nameColumn.setId("name");
                     nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
-                    TableColumn mondayColumn = new TableColumn("Monday");
+                    TableColumn mondayColumn = new TableColumn("Mandag");
                     mondayColumn.setId("day");
 
                     TableColumn<Person, Integer> mondayStart = new TableColumn<>("Start");
-                    mondayStart.setId("time");
+                    mondayStart.setId("timeStart");
                     mondayStart.setCellValueFactory(new PropertyValueFactory<>("timesMondayStart"));
 
-                    TableColumn<Person, Integer> mondayEnd = new TableColumn<>("End");
-                    mondayEnd.setId("time");
+                    TableColumn<Person, Integer> mondayEnd = new TableColumn<>("Slut");
+                    mondayEnd.setId("timeEnd");
                     mondayEnd.setCellValueFactory(new PropertyValueFactory<>("timesMondayEnd"));
 
                     mondayColumn.getColumns().addAll(mondayStart, mondayEnd);
 
-                    TableColumn thuesdayColumn = new TableColumn<>("Thuesday");
+                    TableColumn thuesdayColumn = new TableColumn<>("Tirsdag");
                     thuesdayColumn.setId("day");
 
                     TableColumn<Person, Integer> thuesdayStart = new TableColumn<>("Start");
-                    thuesdayStart.setId("time");
+                    thuesdayStart.setId("timeStart");
                     thuesdayStart.setCellValueFactory(new PropertyValueFactory<>("timesThuesdayStart"));
 
-                    TableColumn<Person, Integer> thuesdayEnd = new TableColumn<>("End");
-                    thuesdayEnd.setId("time");
+                    TableColumn<Person, Integer> thuesdayEnd = new TableColumn<>("Slut");
+                    thuesdayEnd.setId("timeEnd");
                     thuesdayEnd.setCellValueFactory(new PropertyValueFactory<>("timesThuesdayEnd"));
 
                     thuesdayColumn.getColumns().addAll(thuesdayStart, thuesdayEnd);
 
-                    TableColumn wednesdayColumn = new TableColumn("Wednesday");
+                    TableColumn wednesdayColumn = new TableColumn("Onsdag");
                     wednesdayColumn.setId("day");
 
                     TableColumn<Person, Integer> wednesdayStart = new TableColumn<>("Start");
-                    wednesdayStart.setId("time");
+                    wednesdayStart.setId("timeStart");
                     wednesdayStart.setCellValueFactory(new PropertyValueFactory<>("timesWednesdayStart"));
 
-                    TableColumn<Person, Integer> wednesdayEnd = new TableColumn<>("End");
-                    wednesdayEnd.setId("time");
+                    TableColumn<Person, Integer> wednesdayEnd = new TableColumn<>("Slut");
+                    wednesdayEnd.setId("timeEnd");
                     wednesdayEnd.setCellValueFactory(new PropertyValueFactory<>("timesWednesdayEnd"));
 
                     wednesdayColumn.getColumns().addAll(wednesdayStart, wednesdayEnd);
 
-                    TableColumn thursdayColumn = new TableColumn("Thursday");
+                    TableColumn thursdayColumn = new TableColumn("Torsdag");
                     thursdayColumn.setId("day");
 
                     TableColumn<Person, Integer> thursdayStart = new TableColumn<>("Start");
-                    thursdayStart.setId("time");
+                    thursdayStart.setId("timeStart");
                     thursdayStart.setCellValueFactory(new PropertyValueFactory<>("timesThursdayStart"));
 
-                    TableColumn<Person, Integer> thursdayEnd = new TableColumn<>("End");
-                    thursdayEnd.setId("time");
+                    TableColumn<Person, Integer> thursdayEnd = new TableColumn<>("Slut");
+                    thursdayEnd.setId("timeEnd");
                     thursdayEnd.setCellValueFactory(new PropertyValueFactory<>("timesThursdayEnd"));
 
                     thursdayColumn.getColumns().addAll(thursdayStart, thursdayEnd);
 
-                    TableColumn fridayColumn = new TableColumn("Friday");
+                    TableColumn fridayColumn = new TableColumn("Fredag");
                     fridayColumn.setId("day");
 
                     TableColumn<Person, Integer> fridayStart = new TableColumn("Start");
-                    fridayStart.setId("time");
+                    fridayStart.setId("timeStart");
                     fridayStart.setCellValueFactory(new PropertyValueFactory<>("timesFridayStart"));
 
-                    TableColumn<Person, Integer> fridayEnd = new TableColumn<>("End");
-                    fridayEnd.setId("time");
+                    TableColumn<Person, Integer> fridayEnd = new TableColumn<>("Slut");
+                    fridayEnd.setId("timeEnd");
                     fridayEnd.setCellValueFactory(new PropertyValueFactory<>("timesFridayEnd"));
 
                     fridayColumn.getColumns().addAll(fridayStart, fridayEnd);
+
+                    //TableColumn blank = new TableColumn();
+                    //blank.setId("blankCell");
 
                     tableViewTimeplan = new TableView<>();
                     tableViewTimeplan.setItems(getPerson());
@@ -219,7 +253,7 @@ public class Main extends Application {
                             fridayColumn);
 
 
-                    vboxTimeplan.getChildren().add(tableViewTimeplan);
+                    vboxTimeplan.getChildren().addAll(hboxWeek, tableViewTimeplan);
                     bpLoggedIn.setCenter(vboxTimeplan);
                 });
 
@@ -242,6 +276,9 @@ public class Main extends Application {
     public ObservableList<Person> getPerson() {
         ObservableList<Person> persons = FXCollections.observableArrayList();
         persons.add(new Person("Daniella", 8, 16, 8, 16, 8, 16, 8,16, 8, 16));
+        persons.add(new Person("Jarline", 10, 11, 9, 10, 10, 11, 11, 12, 10, 12));
+        persons.add(new Person("Joakimse", 8, 14, 15, 17, 7, 16, 7, 10, 10, 15));
+        persons.add(new Person("Andersine", 7, 17, 10, 12, 10, 11, 8, 13, 11, 16));
         return persons;
     }
 
